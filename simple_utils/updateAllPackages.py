@@ -1,12 +1,10 @@
-import sys
-import os
+from sys import executable
 import pip
-from subprocess import call
-import subprocess
+from subprocess import call,check_output
 
 if __name__ == "__main__":
   try:
-    reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
+    reqs = check_output([executable, '-m', 'pip', 'freeze'])
     installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
     for packages in installed_packages:
         try:
@@ -18,5 +16,7 @@ if __name__ == "__main__":
             print("Unable to install package : ",packages,"\n Try manually updating the package \n")
 
   except Exception as e:
-       print("OOPS!! there seems to be a problem\nError :: ",e)
+       print("\nOOPS!! there seems to be a problem\nError :: ",e,"\n\n")
+  finally:
+      call("pip list")
   
