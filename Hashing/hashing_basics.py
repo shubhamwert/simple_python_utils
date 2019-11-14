@@ -46,6 +46,9 @@ class HashTable:
                 print("Data Inserted at location ",i)
                 return
         print("Unable to insert data ...")
+    
+
+
 
 if __name__ == "__main__":
     a=HashTable("Mbucket",5)
