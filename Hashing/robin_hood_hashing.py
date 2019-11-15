@@ -1,6 +1,4 @@
-import sys
-import hashing_basics
-
+#Robinhood hashing
 class RobinHashing:
     def __init__(self,name,size):
         self.name=name
@@ -88,34 +86,58 @@ class RobinHashing:
         print("current distance = ",location-i+dist)
         print("Unable to insert current  data, Bucket might be full ...")
     
+    def LinearSearch(self,data):
+        data_hash=hash(data)
+        dist=0
+        location=data_hash%self.size
+        for i in range(location,self.size):
+            if(data==self.__bucket[i][0]):
+                print(data," found at location at ",i)
+                return
+            else:
+                if(self.__bucket[i][2]>dist):
+                    break
+            dist=dist+1
+        dist=0
+        i=location
+        while i>=0:
+            if(data==self.__bucket[i][0]):
+                print(data," found at location at ",i)
+                break
+            else:
+                if(self.__bucket[i][2]>dist):
+                    break    
+            i=i-1
+            dist=dist+1 
+        print("Data not found")
 
+
+
+def test():
+    a=RobinHashing("Mtable",5)
+    a.InsertData("Hello")
+    print(a.getBucket())
+    a.InsertData("jello")
+    print(a.getBucket())
+
+    a.InsertData("yellow")
+    print(a.getBucket())
+
+    a.InsertData("Hello")
+    print(a.getBucket())
+    a.InsertData("Hello")
+    print(a.getBucket())
+    a.InsertData("Hello")
+    print(a.getBucket())
+    a.InsertData("jello")
+    print(a.getBucket())
+
+    a.InsertData("yellow")
+    print(a.getBucket())
+    a.LinearSearch("ello")
+    a.LinearSearch("yellow")
+    a.LinearSearch("Hello")
+    a.LinearSearch("UUU")
 
 if __name__ == "__main__":
-    a=RobinHashing("Mtable",6)
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("jello")
-    print(a.getBucket())
-
-    a.InsertData("yellow")
-    print(a.getBucket())
-
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("jello")
-    print(a.getBucket())
-
-    a.InsertData("yellow")
-    print(a.getBucket())
-
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("ello")
-    print(a.getBucket())
-    
-    
-    
+    test()

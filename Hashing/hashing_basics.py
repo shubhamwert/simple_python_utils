@@ -1,5 +1,4 @@
 #Creating a simple hash table
-import sys
 class HashTable:
     def __init__(self,name,size,probing_mehtod="__Linear"):
         self.name=name
@@ -47,15 +46,30 @@ class HashTable:
                 return
         print("Unable to insert data ...")
     
-
-
-
-if __name__ == "__main__":
+    def Linear_Search(self,data):
+        datahash=hash(data)
+        location=datahash%self.size
+        for i in range(location,self.size):
+            if(self.__bucket[i][0]==data):
+                print(data," found at location ",i)
+                return
+        for i in range(location):
+            if(self.__bucket[i][0]==data):
+                print(data," found at location ",i)
+                return
+        print("Data not found in bucket")
+def test():    
     a=HashTable("Mbucket",5)
     a.InsertData("shubham")
     a.InsertData("shubham1")
     a.InsertData("shubham2")
     a.InsertData("shubham3")
     a.InsertData("shubha3")
-
+    a.Linear_Search("shubham3")
+    a.Linear_Search("shubham")
+    a.Linear_Search("shub")
     print(a.getBucket())
+if __name__ == "__main__":
+    test()
+    
+
