@@ -62,14 +62,11 @@ class HashTable:
         return False
 def test():    
     a=HashTable("Mbucket",5)
-    a.InsertData("shubham")
-    a.InsertData("shubham1")
-    a.InsertData("shubham2")
-    a.InsertData("shubham3")
-    a.InsertData("shubha3")
-    a.Linear_Search("shubham3")
-    a.Linear_Search("shubham")
-    a.Linear_Search("shub")
+    for i in ["Hello","ello","yellow","jellow","pellow","mellow"]:
+        a.InsertData(i)
+        print(a.getBucket())
+    for i in ["Hello","yellow","UUU"]:
+        a.Linear_Search(i)
     print(a.getBucket())
 if __name__ == "__main__":
     test()

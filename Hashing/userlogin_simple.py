@@ -1,7 +1,7 @@
 from chained_hashing import ChainedHash
 
 
-
+#To do : chained hashing can cause a problem that for different user it can grant access under same password due to collsion
 class User:
     def __init__(self,user_name,password):
         self.__user_name=user_name

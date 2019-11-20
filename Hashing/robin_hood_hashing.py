@@ -115,29 +115,12 @@ class RobinHashing:
 
 def test():
     a=RobinHashing("Mtable",5)
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("jello")
-    print(a.getBucket())
-
-    a.InsertData("yellow")
-    print(a.getBucket())
-
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("Hello")
-    print(a.getBucket())
-    a.InsertData("jello")
-    print(a.getBucket())
-
-    a.InsertData("yellow")
-    print(a.getBucket())
-    a.LinearSearch("ello")
-    a.LinearSearch("yellow")
-    a.LinearSearch("Hello")
-    a.LinearSearch("UUU")
+    for i in ["Hello","ello","yellow","jellow","pellow","mellow"]:
+        a.InsertData(i)
+        print(a.getBucket())
+    for i in ["Hello","yellow","UUU"]:
+        a.LinearSearch(i)
+    
 
 if __name__ == "__main__":
     test()
