@@ -7,16 +7,16 @@ class HashTable:
         self.probingMehtod=probing_mehtod
 
         print("Empty bucket initiated named ",name)
-    def __detectCollision(self,location):
+    def _detectCollision(self,location):
         if(self.__bucket[location][1]==0):
             return False
         else:
             return True
 
-    def __InsertAtLoc(self,data,location):
-        if(self.__detectCollision(location)):
+    def _InsertAtLoc(self,data,location):
+        if(self._detectCollision(location)):
             print("Collision detected")
-            self.__HandelCollision(data,location)
+            self._HandelCollision(data,location)
         else:
             self.__bucket[location][0]=data
             self.__bucket[location][1]=1
@@ -25,13 +25,13 @@ class HashTable:
     def InsertData(self,data):
         newdata=hash(data)
         location=newdata%self.size
-        self.__InsertAtLoc(data,location)
+        self._InsertAtLoc(data,location)
     def getBucket(self):
         return self.__bucket
-    def __HandelCollision(self,data,location):
-        self.__Linear(data,location)
+    def _HandelCollision(self,data,location):
+        self._Linear(data,location)
 
-    def __Linear(self,data,location):
+    def _Linear(self,data,location):
         for i in range(location,self.size):
             if(self.__bucket[i][1]==0):
                 self.__bucket[i][0]=data
