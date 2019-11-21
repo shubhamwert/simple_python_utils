@@ -15,8 +15,9 @@ class ChainedHash(hashing_basics.HashTable):
         for i in self._HashTable__bucket[location]:
             if(i==data):
                 print(data," found at location ",location)
-                return
+                return True
         print("Data not found")
+        return False
 
 def test():    
     a=ChainedHash("Mbucket",5)

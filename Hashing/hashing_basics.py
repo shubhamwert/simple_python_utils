@@ -37,14 +37,15 @@ class HashTable:
                 self.__bucket[i][0]=data
                 self.__bucket[i][1]=1
                 print("Data Inserted at location ",i)
-                return
+                return True
         for i in range(location):
             if(self.__bucket[i][1]==0):
                 self.__bucket[i][0]=data
                 self.__bucket[i][1]=1
                 print("Data Inserted at location ",i)
-                return
+                return True
         print("Unable to insert data ...")
+        return False
     
     def Linear_Search(self,data):
         datahash=hash(data)
@@ -52,12 +53,13 @@ class HashTable:
         for i in range(location,self.size):
             if(self.__bucket[i][0]==data):
                 print(data," found at location ",i)
-                return
+                return True
         for i in range(location):
             if(self.__bucket[i][0]==data):
                 print(data," found at location ",i)
-                return
+                return True
         print("Data not found in bucket")
+        return False
 def test():    
     a=HashTable("Mbucket",5)
     a.InsertData("shubham")
