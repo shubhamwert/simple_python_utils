@@ -3,6 +3,11 @@ import cv2
 import pyautogui
 import ctypes
 import numpy as np
+from pynput.mouse import Listener
+#CLASS VARIABLES
+cropping = False
+refPt = []
+
 def getScreenShot(Screen_size=pyautogui.size()):
     img=pyautogui.screenshot(region=(0,0,Screen_size[0],Screen_size[0]))
     
@@ -12,13 +17,13 @@ def getScreenShot(Screen_size=pyautogui.size()):
     cv2.imwrite('screenshot.png',img)
     print("screen shot taken")
     return True
-def record(Screen_Size=pyautogui.size(),codec="xvid",fps=20):
+def record(Screen_Size=pyautogui.size(),region:tuple=(0,0,pyautogui.size()[0],pyautogui.size()[1]),codec="xvid",fps=20):
     if(type(codec) != str):
         print("Codec must be a string")
     fourcc = cv2.VideoWriter_fourcc(*codec)
     out = cv2.VideoWriter("output.avi", fourcc, fps, Screen_Size)
     while True:
-        frame=pyautogui.screenshot(region=(0,0,Screen_Size[0],Screen_Size[1]))
+        frame=pyautogui.screenshot(region=region)
         frame=np.array(frame)
 
         frame=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
@@ -30,3 +35,16 @@ def record(Screen_Size=pyautogui.size(),codec="xvid",fps=20):
 
     cv2.destroyAllWindows()
     out.release()
+
+def selectArea(x, y, button,pressed):
+    global refPt,cropping
+    print(button,'\n',pressed)
+    if pressed:
+        refPt=[(x,y)]
+        cropping=True
+    else:
+        refPt.append(((x,y)))
+        cropping=False
+def ConnectMouse():
+    with Listener(on_click=selectArea) as listner:
+        listner.join()

@@ -1,6 +1,5 @@
-import utils as u
-
-
+import utils.utils as u
+import models.model as m
 if __name__ == "__main__":
-    u.getScreenShot()
-    u.record()
+    mp=m.Recorder("hello.avi")
+    mp.setRegion()
