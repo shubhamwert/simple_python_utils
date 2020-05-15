@@ -3,9 +3,9 @@ import pyautogui
 import ctypes
 import numpy as np
 from pynput.mouse import Listener
-
+import time
 class Recorder():
-    def __init__(self,file:str,codec="xvid",fps=20):
+    def __init__(self,file:str,codec="xVid",fps=20):
         self.codec=codec
         self.fps=fps
         self.filename=file
@@ -13,30 +13,37 @@ class Recorder():
         self.region=(0,0,pyautogui.size()[0],pyautogui.size()[1])
         self.r=[]
         self.cropping=False
-        self.listner=Listener(on_click=self.selectArea)
+        self.count=0
     def setRegion(self):
+        count=0
         self.ConnectMouse(True)
-        print("MOUSE CONNECTED")
-    
-    
+        time.sleep(5)
+        print(self.r)
+
     def selectArea(self,x, y, button,pressed):
+        print(x,y,button,pressed)
         if pressed:
             self.r=[x,y]
             self.cropping=True
         else:
-            self.r.append([x,y])
+            self.r.append(x)
+            self.r.append(y)
+
             self.cropping=False
             self.region=tuple(self.r)
-
+            self.l.stop()
+            # self.Screen_Size=tuple([abs(self.region[0]-self.region[2]),abs(self.region[1]-self.region[3])])
+            self.Screen_Size=pyautogui.Size(width=abs(self.region[0]-self.region[2]),height=abs(self.region[1]-self.region[3]))
     def ConnectMouse(self,state=True):
         if state:
-            with self.listner as l:
-                l.join()
+            print("CONNECTING MOUSE")
+            self.l= Listener(on_click=self.selectArea)
+            self.l.start()
+                
             print('se')
-            
-        else:
-            with self.listner as l:
-                l.stop()
+        
+
+
             
 
     def record(self):
@@ -44,6 +51,8 @@ class Recorder():
             print("Codec must be a string")
         fourcc = cv2.VideoWriter_fourcc(*self.codec)
         out = cv2.VideoWriter(self.filename, fourcc, self.fps, self.Screen_Size)
+        print(self.region)
+        print(type(self.Screen_Size))
         while True:
             frame=pyautogui.screenshot(region=self.region)
             frame=np.array(frame)
