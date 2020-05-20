@@ -17,7 +17,6 @@ class Recorder():
     def setRegion(self):
         count=0
         self.ConnectMouse(True)
-        time.sleep(5)
         print(self.r)
 
     def selectArea(self,x, y, button,pressed):
@@ -49,18 +48,18 @@ class Recorder():
     def record(self):
         if(type(self.codec) != str):
             print("Codec must be a string")
-        fourcc = cv2.VideoWriter_fourcc(*self.codec)
+        fourcc = cv2.VideoWriter_fourcc(*'MPEG')
         out = cv2.VideoWriter(self.filename, fourcc, self.fps, self.Screen_Size)
         print(self.region)
-        print(type(self.Screen_Size))
         while True:
             frame=pyautogui.screenshot(region=self.region)
             frame=np.array(frame)
 
             frame=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
-            out.write(frame)
             cv2.imshow("current_recording",frame)
+            out.write(frame)
+
             if cv2.waitKey(1) == ord("q"):
                 break
 
