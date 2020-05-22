@@ -5,7 +5,7 @@ import numpy as np
 from pynput.mouse import Listener
 import time
 class Recorder():
-    def __init__(self,file:str,codec="xVid",fps=20):
+    def __init__(self,file:str,codec="xVid",fps=40):
         self.codec=codec
         self.fps=fps
         self.filename=file
