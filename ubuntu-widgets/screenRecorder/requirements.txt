@@ -24,7 +24,7 @@ ptyprocess==0.6.0
 PyAutoGUI==0.9.50
 pycairo==1.19.1
 PyGetWindow==0.0.8
-Pygments==2.7.4
+Pygments==2.15.0
 PyGObject==3.36.1
 pylint==2.5.2
 PyMsgBox==1.0.8
