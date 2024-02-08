@@ -40,7 +40,7 @@ PyTweening==1.0.3
 pyzmq==18.1.1
 six==1.14.0
 toml==0.10.1
-tornado==6.0.4
+tornado==6.3.3
 traitlets==4.3.3
 wcwidth==0.1.9
 wrapt==1.12.1
